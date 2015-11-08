@@ -1,6 +1,6 @@
 var stocks = [];
 
-for(i=0; i<20; i++)
+for(i=0; i<110; i++)
 {
   var boold = true;
   if(i%2)
@@ -9,11 +9,12 @@ for(i=0; i<20; i++)
   }
   stocks.push({
     business:"Business " + i,
-    industry:"Industry " + i,
-    risk:i,
-    reward:i,
+    industry:"Industry " + i%5,
+    risk:Math.floor(Math.random()*100),
+    reward:Math.floor(Math.random()*100),
     up:boold,
-    color:0});
+    color:Math.floor(Math.random()*4),
+    size:Math.floor(Math.random()*4)});
 }
 
 createChart(stocks);
@@ -26,7 +27,7 @@ function createChart(stocks)
                 .showDistX(false)    //showDist, when true, will display those little distribution lines on the axis.
                 .showDistY(false)
                 // .transitionDuration(350)
-                .color(d3.scale.category10().range())
+                .color(["#99FF99","#66FF66","#33CC33","#009933","#003300","#FF1A1A","#FF0000","#E60000","#CC0000","#B30000"])
                 .showLegend(false);
 
   var industryChart = nv.models.scatterChart()
@@ -95,11 +96,9 @@ function createChart(stocks)
  */
 function businessData(stocks)
 { //# groups,# stocks.length per group
-  var data = [],
-      shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
-      random = d3.random.normal();
+  var data = [];
 
-    for(j = 0; j < 5; j++)
+    for(j = 0; j < 10; j++)
     {
       data.push({
         key: stocks[j].business,
@@ -117,10 +116,15 @@ function businessData(stocks)
       {
         curShape = 'triangle-down';
       }
-      data[stocks[i].color].values.push({
+      var colorVal = stocks[i].color;
+      if(!stocks[i].up)
+      {
+        colorVal += 5;
+      }
+      data[colorVal].values.push({
         x: stocks[i].risk
       , y: stocks[i].reward
-      , size: Math.random()   //Configure the size of each scatter point
+      , size: stocks[i].size*10   //Configure the size of each scatter point
       , shape: curShape  //Configure the shape of each scatter point.
       });
     }
@@ -130,35 +134,47 @@ function businessData(stocks)
 
 function industryData(stocks)
 { //# groups,# stocks.length per group
-  var data = [],
-      shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
-      random = d3.random.normal();
+  var data = [];
 
   var groups = 4;
-  for (i = 0; i < groups; i++) {
+  var map = {};
+  var industries = [];
+
+  var k = 0;
+  for (i = 0; i< stocks.length; i++)
+  {
+    if(!map[stocks[i].industry])
+    {
+      map[stocks[i].industry] = k;
+      industries.push(stocks[i].industry);
+      k++;
+    }
+  }
+  // k--;
+  for (i = 0; i < k; i++) {
     data.push({
-      key: stocks[i].industry,
+      key: industries[i],
       values: []
     });
+  }
 
     for (j = 0; j < stocks.length; j++) {
-      var curShape;
+      // var curShape;
       if(stocks[j].up)
       {
-        curShape = 'triangle-up';
+        var curShape = 'triangle-up';
       }
       else
       {
-        curShape = 'triangle-down';
+        var curShape = 'triangle-down';
       }
-      data[i].values.push({
+      data[map[stocks[j].industry]].values.push({
         x: stocks[j].risk
       , y: stocks[j].reward
-      , size: Math.random()   //Configure the size of each scatter point
+      , size:stocks[j].size*10   //Configure the size of each scatter point
       , shape: curShape  //Configure the shape of each scatter point.
       });
     }
-  }
 
   return data;
 }
