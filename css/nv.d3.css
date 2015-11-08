@@ -656,6 +656,10 @@ Interactive Layer
   margin-left: -40px;
 }
 
+#tabs h3, #tabs h2{
+  text-align: center;
+}
+
 .ui-widget-header {
   border: none;
   background: none;
