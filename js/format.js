@@ -20,17 +20,17 @@ for(var i = 0; i < data.length; i++){
 
   d.size = getNumber(d["Market Cap:"]);
   d.business = nasdaq[i];
-  d.industry = "Industry " + Math.floor(Math.random()*5);
+  var industries = ["E-Commerce", "Telecom", "Enterprise Software", "Interactive Media", "Technology"];
+  d.industry = industries[Math.floor(Math.random()*5)];
 }
 
 data.sort(function(a,b){
-  return b.color - a.color;
+  return a.color - b.color;
 });
 
 for (var i = 0; i < data.length; i++) {
   data[i].color = Math.floor(i/(data.length/5));
 }
-
 
 data.sort(function(a,b){
   return b.size - a.size;

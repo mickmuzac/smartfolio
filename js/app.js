@@ -63,12 +63,12 @@ function createChart(stocks)
   businessChart.xAxis.tickFormat(d3.format('.02f'));
   businessChart.xAxis.axisLabel("Risk");
   businessChart.yAxis.tickFormat(d3.format('.02f'));
-  businessChart.yAxis.axisLabel("Reward");
+  businessChart.yAxis.axisLabel("Expected Return");
 
   industryChart.xAxis.tickFormat(d3.format('.02f'));
   industryChart.xAxis.axisLabel("Risk");
   industryChart.yAxis.tickFormat(d3.format('.02f'));
-  industryChart.yAxis.axisLabel("Reward");
+  industryChart.yAxis.axisLabel("Expected Return");
 
   var myData = businessData(stocks);
   d3.select('#business svg')
