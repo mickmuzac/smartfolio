@@ -598,9 +598,9 @@ svg.nvd3-svg {
     text-align: right;
     font-weight: bold;
 }
-.tick text, .nv-axisMaxMin text {
+/*.tick text, .nv-axisMaxMin text {
   display: none;
-}
+}*/
 .nvtooltip table tr.highlight td {
     padding: 1px 9px 1px 0;
     border-bottom-style: solid;

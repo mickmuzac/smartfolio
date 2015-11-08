@@ -83,9 +83,9 @@ function createChart(stocks)
 
   //Draw the line
  var circle = d3.select("svg").append("line")
-                        .attr("x1", 150)
+                        .attr("x1", 180)
                          .attr("y1", 500)
-                         .attr("x2", 750)
+                         .attr("x2", 780)
                          .attr("y2", 50)
                          .attr("stroke-width", 1)
                          .attr("stroke", "darkgray");
@@ -109,17 +109,45 @@ function businessData(stocks)
     }
     for (i = stocks.length-1; i >= 0; i--)
     {
+      var p1 = {};
+      p1.x = -.2;
+      p1.y = .7;
+      var p2 = {};
+      p2.x = 2.3;
+      p2.y = 1.6;
+      var p3 = {};
+      p3.x = -.2;
+      p3.y = 1.6;
 
+      var p = {};
+      p.x = stocks[i].risk;
+      p.y = stocks[i].reward;
+
+      var alpha = ((p2.y - p3.y)*(p.x - p3.x) + (p3.x - p2.x)*(p.y - p3.y)) /
+          ((p2.y - p3.y)*(p1.x - p3.x) + (p3.x - p2.x)*(p1.y - p3.y));
+      var beta = ((p3.y - p1.y)*(p.x - p3.x) + (p1.x - p3.x)*(p.y - p3.y)) /
+             ((p2.y - p3.y)*(p1.x - p3.x) + (p3.x - p2.x)*(p1.y - p3.y));
+      var gamma = 1.0 - alpha - beta;
 
       var curShape;
-      if(stocks[i].up)
+      if(alpha >0 && beta >0 && gamma >0)
       {
-        curShape = 'circle';
+        curShape = 'diamond';
       }
       else
       {
         curShape = 'circle';
       }
+
+
+      // if(stocks[i].up)
+      // {
+      //   curShape = 'circle';
+      // }
+      // else
+      // {
+      //   curShape = 'circle';
+      // }
       var colorVal = stocks[i].color;
       // if(!stocks[i].up)
       // {
@@ -180,7 +208,7 @@ function industryData(stocks)
       // stocks.splice(i);
       continue;
     }
-    // var curShape;
+
     if(stocks[j].up)
     {
       var curShape = 'circle';
