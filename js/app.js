@@ -39,7 +39,7 @@ function createChart(stocks)
 
   businessChart.tooltip.contentGenerator(function (d) {
           console.log(d);
-          var html = "<h2>"+ d.value +"</h2> <ul>";
+          var html = "<h2>"+ d.point.business +"</h2> <ul>";
 
           d.series.forEach(function(elem){
             html += "<li><h3 style='color:"+elem.color+"'>"
@@ -69,10 +69,6 @@ function createChart(stocks)
   industryChart.xAxis.axisLabel("Risk");
   industryChart.yAxis.tickFormat(d3.format('.02f'));
   industryChart.yAxis.axisLabel("Reward");
-    // .axisLabelDistance(40);
-
-  //We want to show shapes other than circles.
-  // chart.scatter.onlyCircles(false);
 
   var myData = businessData(stocks);
   d3.select('#business svg')
@@ -136,7 +132,6 @@ function industryData(stocks)
 { //# groups,# stocks.length per group
   var data = [];
 
-  var groups = 4;
   var map = {};
   var industries = [];
 
@@ -151,30 +146,32 @@ function industryData(stocks)
     }
   }
 
-  for (i = 0; i < Object.keys(map).length+1; i++) {
+  for (i = 0; i < Object.keys(map).length+1; i++)
+  {
     data.push({
       key: industries[i],
       values: []
     });
   }
 
-    for (j = 0; j < stocks.length; j++) {
-      // var curShape;
-      if(stocks[j].up)
-      {
-        var curShape = 'triangle-up';
-      }
-      else
-      {
-        var curShape = 'triangle-down';
-      }
-      data[map[stocks[j].industry]].values.push({
-        x: stocks[j].risk
-      , y: stocks[j].reward
-      , size:stocks[j].size*10   //Configure the size of each scatter point
-      , shape: curShape  //Configure the shape of each scatter point.
-      });
+  for (j = 0; j < stocks.length; j++)
+  {
+    // var curShape;
+    if(stocks[j].up)
+    {
+      var curShape = 'triangle-up';
     }
+    else
+    {
+      var curShape = 'triangle-down';
+    }
+    data[map[stocks[j].industry]].values.push({
+      x: stocks[j].risk
+    , y: stocks[j].reward
+    , size:stocks[j].size*10   //Configure the size of each scatter point
+    , shape: curShape  //Configure the shape of each scatter point.
+    });
+  }
 
   return data;
 }
