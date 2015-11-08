@@ -39,24 +39,20 @@ function createChart(stocks)
 
   businessChart.tooltip.contentGenerator(function (d) {
           console.log(d);
-          var html = "<h2>"+ d.point.business +"</h2> <ul>";
+          var html = "<h2>"+ d.point.business +"</h2>";
 
-          d.series.forEach(function(elem){
-            html += "<li><h3 style='color:"+elem.color+"'>"
-                    +d.point.industry+"</h3></li>";
-          })
-          html += "</ul>"
+          html += "<h3 style='color:"+d.point.color+"'>"
+                  +d.point.industry+"</h3>";
+
           return html;
         })
 
   industryChart.tooltip.contentGenerator(function (d) {
-          var html = "<h2>"+ d.point.business +"</h2> <ul>";
+          var html = "<h2>"+ d.point.business +"</h2>";
           var i = 0;
-          d.series.forEach(function(elem){
-            html += "<li><h3 style='color:"+elem.color+"'>"
-                    +d.point.industry+"</h3></li>";
-          })
-          html += "</ul>"
+
+          html += "<h3 style='color:"+d.point.color+"'>"
+                  +d.point.industry+"</h3>";
           return html;
         })
 
