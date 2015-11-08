@@ -39,7 +39,7 @@ function createChart(stocks)
 
   businessChart.tooltip.contentGenerator(function (d) {
           console.log(d);
-          var html = "<h2>"+ d.value +"</h2> <ul>";
+          var html = "<h2>"+ d.point.business +"</h2> <ul>";
 
           d.series.forEach(function(elem){
             html += "<li><h3 style='color:"+elem.color+"'>"
@@ -51,10 +51,11 @@ function createChart(stocks)
 
   industryChart.tooltip.contentGenerator(function (d) {
           var html = "<h2>"+ d.value +"</h2> <ul>";
-
+          var i = 0;
           d.series.forEach(function(elem){
             html += "<li><h3 style='color:"+elem.color+"'>"
-                    +elem.key+"</h3> : <b>"+elem.value+"</b></li>";
+                    +i+"</h3> : <b>"+elem.value+"</b></li>";
+            i++;
           })
           html += "</ul>"
           return html;
@@ -100,6 +101,13 @@ function businessData(stocks)
 
     for(j = 0; j < stocks.length; j++)
     {
+      if(stocks[j].business == "EA" ||
+      stocks[j].business == "LBTYK"){
+        stocks.splice(j);
+        j--;
+        continue;
+      }
+
       data.push({
         key: stocks[j].business,
         values: []
@@ -122,10 +130,11 @@ function businessData(stocks)
         colorVal += 5;
       }
       data[colorVal].values.push({
-        x: stocks[i].risk
+        x: parseFloat(stocks[i].risk)
       , y: stocks[i].reward
       , size: stocks[i].size*10   //Configure the size of each scatter point
       , shape: curShape  //Configure the shape of each scatter point.
+      , business: stocks[i].business
       });
     }
 
