@@ -122,7 +122,8 @@ function businessData(stocks)
       }
       if(stocks[i].business == "EA" ||
       stocks[i].business == "LBTYK" ||
-      stocks[i].business == "CHTR"){
+      stocks[i].business == "CHTR" ||
+      stocks[i].business == "AAL" ){
         continue;
       }
       data[colorVal].values.push({
@@ -168,7 +169,8 @@ function industryData(stocks)
   {
     if(stocks[j].business == "EA" ||
     stocks[j].business == "LBTYK" ||
-    stocks[j].business == "CHTR"){
+    stocks[j].business == "CHTR" ||
+    stocks[j].business == "AAL" ){
       // console.log(stocks[i].business);
       // stocks.splice(i);
       continue;

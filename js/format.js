@@ -14,9 +14,9 @@ for(var i = 0; i < data.length; i++){
 
   d.risk = d["Beta:"] == "N/A" ? 0 : d["Beta:"] ;
   d.reward = parseFloat(d["1y Target Est:"])/parseFloat(d["Prev Close:"]);
-  if(isNaN(d.reward)) d.reward = 0;
+  if(isNaN(d.reward)) d.reward = Math.random();
 
-  d.color = d["P/E (ttm):"] ==  "N/A" ? 0 : parseFloat(d["P/E (ttm):"]);
+  d.color = d["P/E (ttm):"] ==  "N/A" ? Math.random() : parseFloat(d["P/E (ttm):"]);
 
   d.size = getNumber(d["Market Cap:"]);
   d.business = nasdaq[i];
