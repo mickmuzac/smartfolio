@@ -148,7 +148,7 @@ function industryData(stocks)
   var k = 0;
   for (i = 0; i< stocks.length; i++)
   {
-    if(!map[stocks[i].industry])
+    if(industries.indexOf(stocks[i].industry) == -1)
     {
       map[stocks[i].industry] = k;
       industries.push(stocks[i].industry);
@@ -156,7 +156,7 @@ function industryData(stocks)
     }
   }
 
-  for (i = 0; i < Object.keys(map).length+1; i++)
+  for (i = 0; i < industries.length; i++)
   {
     data.push({
       key: industries[i],
