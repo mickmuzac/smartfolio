@@ -114,20 +114,21 @@ function businessData(stocks)
       var curShape;
       if(stocks[i].up)
       {
-        curShape = 'triangle-up';
+        curShape = 'circle';
       }
       else
       {
-        curShape = 'triangle-down';
+        curShape = 'circle';
       }
       var colorVal = stocks[i].color;
-      if(!stocks[i].up)
-      {
-        colorVal += 5;
-      }
+      // if(!stocks[i].up)
+      // {
+      //   colorVal += 5;
+      // }
       if(stocks[i].business == "EA" ||
       stocks[i].business == "LBTYK" ||
-      stocks[i].business == "CHTR"){
+      stocks[i].business == "CHTR" ||
+      stocks[i].business == "AAL" ){
         continue;
       }
       data[colorVal].values.push({
@@ -173,7 +174,8 @@ function industryData(stocks)
   {
     if(stocks[j].business == "EA" ||
     stocks[j].business == "LBTYK" ||
-    stocks[j].business == "CHTR"){
+    stocks[j].business == "CHTR" ||
+    stocks[j].business == "AAL" ){
       // console.log(stocks[i].business);
       // stocks.splice(i);
       continue;
@@ -181,11 +183,11 @@ function industryData(stocks)
     // var curShape;
     if(stocks[j].up)
     {
-      var curShape = 'triangle-up';
+      var curShape = 'circle';
     }
     else
     {
-      var curShape = 'triangle-down';
+      var curShape = 'circle';
     }
     data[map[stocks[j].industry]].values.push({
       x: stocks[j].risk
