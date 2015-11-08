@@ -98,7 +98,7 @@ function businessData(stocks)
 { //# groups,# stocks.length per group
   var data = [];
 
-    for(j = 0; j < 10; j++)
+    for(j = 0; j < stocks.length; j++)
     {
       data.push({
         key: stocks[j].business,
