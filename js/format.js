@@ -1,5 +1,13 @@
 var minSize = Infinity, maxSize = Infinity;
 var minColor = Infinity, maxColor = -Infinity;
+var nasdaq = ["BA","ATVI","ADBE","AKAM","ALXN","GOOG","GOOGL","AMZN","AAL","AMGN","ADI","AAPL","AMAT","ADSK","ADP","AVGO",
+"BIDU","BBBY","BIIB","BMRN","BRCM","CHRW","CA","CELG","CERN","CHTR","CHKP","CSCO","CTXS","CTSH","CMCSA",
+"CMCSK","COST","DISCA","DISCK","DISH","DLTR","EBAY","EA","EXPD","ESRX","FB","FAST","FISV","GRMN","GILD",
+"HSIC","ILMN","INCY","INTC","INTU","ISRG","JD","GMCR","KLAC","LRCX","LBTYA","LBTYK","LILA","LILAK","LVNTA",
+"QVCA","LMCA","LMCK","LLTC","MAR","MAT","MU","MSFT","MDLZ","MNST","MYL","NTAP","NFLX","NVDA","NXPI","ORLY",
+"PCAR","PAYX","QCOM","REGN","ROST","SNDK","SBAC","STX","SIRI","SWKS","SPLS","SBUX","SRCL","SYMC","TSLA",
+"TXN","KHC","PCLN","TSCO","TRIP","FOX","FOXA","VRSK","VRTX","VIAB","VIP","VOD","WBA","WDC","WFM","WYNN",
+"XLNX","YHOO"];
 
 for(var i = 0; i < data.length; i++){
   var d = data[i];
@@ -10,8 +18,9 @@ for(var i = 0; i < data.length; i++){
   d.color = d["P/E (ttm):"] ==  "N/A" ? 0 : parseFloat(d["P/E (ttm):"]);
 
   d.size = getNumber(d["Market Cap:"]);
-  console.log(d.color);
-
+  d.business = nasdaq[i];
+  d.industry = "Industry " + Math.floor(Math.random()*5);
+  console.log(d);
 }
 
 data.sort(function(a,b){
@@ -19,7 +28,7 @@ data.sort(function(a,b){
 });
 
 for (var i = 0; i < data.length; i++) {
-  data[i].color = i/(data.length/5);
+  data[i].color = Math.floor(i/(data.length/5));
 }
 
 
@@ -28,7 +37,7 @@ data.sort(function(a,b){
 });
 
 for (var i = 0; i < data.length; i++) {
-  data[i].size = i/(data.length/5);
+  data[i].size = Math.floor(i/(data.length/5));
 }
 
 console.log(data);

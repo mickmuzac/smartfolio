@@ -1,21 +1,21 @@
-var stocks = [];
+var stocks = data;
 
-for(l=0; l<110; l++)
-{
-  var boold = true;
-  if(l%2)
-  {
-    boold = false;
-  }
-  stocks.push({
-    business:"Business " + l,
-    industry:"Industry " + l%5,
-    risk:Math.floor(Math.random()*100),
-    reward:Math.floor(Math.random()*100),
-    up:boold,
-    color:Math.floor(Math.random()*4),
-    size:Math.floor(Math.random()*4)});
-}
+// for(l=0; l<110; l++)
+// {
+//   var boold = true;
+//   if(l%2)
+//   {
+//     boold = false;
+//   }
+//   stocks.push({
+//     business:"Business " + l,
+//     industry:"Industry " + l%5,
+//     risk:Math.floor(Math.random()*100),
+//     reward:Math.floor(Math.random()*100),
+//     up:boold,
+//     color:Math.floor(Math.random()*4),
+//     size:Math.floor(Math.random()*4)});
+// }
 
 createChart(stocks);
 
