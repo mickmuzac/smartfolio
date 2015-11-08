@@ -81,6 +81,15 @@ function createChart(stocks)
   nv.utils.windowResize(businessChart.update);
   nv.utils.windowResize(industryChart.update);
 
+  //Draw the line
+ var circle = d3.select("svg").append("line")
+                        .attr("x1", 80)
+                         .attr("y1", 500)
+                         .attr("x2", 700)
+                         .attr("y2", 50)
+                         .attr("stroke-width", 1)
+                         .attr("stroke", "darkgray");
+
 }
 
 /**************************************
