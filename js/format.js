@@ -25,7 +25,7 @@ for(var i = 0; i < data.length; i++){
 }
 
 data.sort(function(a,b){
-  return a.color - b.color;
+  return b.color - a.color;
 });
 
 for (var i = 0; i < data.length; i++) {
@@ -33,7 +33,7 @@ for (var i = 0; i < data.length; i++) {
 }
 
 data.sort(function(a,b){
-  return b.size - a.size;
+  return a.size - b.size;
 });
 
 for (var i = 0; i < data.length; i++) {
