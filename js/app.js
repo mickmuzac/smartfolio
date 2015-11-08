@@ -43,19 +43,18 @@ function createChart(stocks)
 
           d.series.forEach(function(elem){
             html += "<li><h3 style='color:"+elem.color+"'>"
-                    +elem.key+"</h3> : <b>"+elem.value+"</b></li>";
+                    +d.point.industry+"</h3></li>";
           })
           html += "</ul>"
           return html;
         })
 
   industryChart.tooltip.contentGenerator(function (d) {
-          var html = "<h2>"+ d.value +"</h2> <ul>";
+          var html = "<h2>"+ d.point.business +"</h2> <ul>";
           var i = 0;
           d.series.forEach(function(elem){
             html += "<li><h3 style='color:"+elem.color+"'>"
-                    +i+"</h3> : <b>"+elem.value+"</b></li>";
-            i++;
+                    +d.point.industry+"</h3></li>";
           })
           html += "</ul>"
           return html;
@@ -97,20 +96,16 @@ function businessData(stocks)
 
     for(j = 0; j < stocks.length; j++)
     {
-      if(stocks[j].business == "EA" ||
-      stocks[j].business == "LBTYK"){
-        stocks.splice(j);
-        j--;
-        continue;
-      }
 
       data.push({
         key: stocks[j].business,
         values: []
       });
     }
-    for (i = 0; i < stocks.length; i++)
+    for (i = stocks.length-1; i >= 0; i--)
     {
+
+
       var curShape;
       if(stocks[i].up)
       {
@@ -125,12 +120,18 @@ function businessData(stocks)
       {
         colorVal += 5;
       }
+      if(stocks[i].business == "EA" ||
+      stocks[i].business == "LBTYK" ||
+      stocks[i].business == "CHTR"){
+        continue;
+      }
       data[colorVal].values.push({
         x: parseFloat(stocks[i].risk)
       , y: stocks[i].reward
       , size: stocks[i].size*10   //Configure the size of each scatter point
       , shape: curShape  //Configure the shape of each scatter point.
       , business: stocks[i].business
+      , industry: stocks[i].industry
       });
     }
 
@@ -163,8 +164,15 @@ function industryData(stocks)
     });
   }
 
-  for (j = 0; j < stocks.length; j++)
+  for (j = stocks.length-1; j >= 0; j--)
   {
+    if(stocks[j].business == "EA" ||
+    stocks[j].business == "LBTYK" ||
+    stocks[j].business == "CHTR"){
+      // console.log(stocks[i].business);
+      // stocks.splice(i);
+      continue;
+    }
     // var curShape;
     if(stocks[j].up)
     {
@@ -179,6 +187,8 @@ function industryData(stocks)
     , y: stocks[j].reward
     , size:stocks[j].size*10   //Configure the size of each scatter point
     , shape: curShape  //Configure the shape of each scatter point.
+    , business: stocks[j].business
+    , industry: stocks[j].industry
     });
   }
 
