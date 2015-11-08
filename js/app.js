@@ -1,15 +1,15 @@
 var stocks = [];
 
-for(i=0; i<110; i++)
+for(l=0; l<110; l++)
 {
   var boold = true;
-  if(i%2)
+  if(l%2)
   {
     boold = false;
   }
   stocks.push({
-    business:"Business " + i,
-    industry:"Industry " + i%5,
+    business:"Business " + l,
+    industry:"Industry " + l%5,
     risk:Math.floor(Math.random()*100),
     reward:Math.floor(Math.random()*100),
     up:boold,
@@ -150,8 +150,8 @@ function industryData(stocks)
       k++;
     }
   }
-  // k--;
-  for (i = 0; i < k; i++) {
+
+  for (i = 0; i < Object.keys(map).length+1; i++) {
     data.push({
       key: industries[i],
       values: []
