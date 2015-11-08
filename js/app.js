@@ -83,9 +83,9 @@ function createChart(stocks)
 
   //Draw the line
  var circle = d3.select("svg").append("line")
-                        .attr("x1", 180)
+                        .attr("x1", 240)
                          .attr("y1", 500)
-                         .attr("x2", 780)
+                         .attr("x2", 850)
                          .attr("y2", 50)
                          .attr("stroke-width", 1)
                          .attr("stroke", "darkgray");
