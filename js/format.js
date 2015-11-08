@@ -12,19 +12,19 @@ var nasdaq = ["BA","ATVI","ADBE","AKAM","ALXN","GOOG","GOOGL","AMZN","AAL","AMGN
 for(var i = 0; i < data.length; i++){
   var d = data[i];
 
-  d.risk = d["Beta:"];
+  d.risk = d["Beta:"] == "N/A" ? 0 : d["Beta:"] ;
   d.reward = parseFloat(d["1y Target Est:"])/parseFloat(d["Prev Close:"]);
+  if(isNaN(d.reward)) d.reward = 0;
 
   d.color = d["P/E (ttm):"] ==  "N/A" ? 0 : parseFloat(d["P/E (ttm):"]);
 
   d.size = getNumber(d["Market Cap:"]);
   d.business = nasdaq[i];
   d.industry = "Industry " + Math.floor(Math.random()*5);
-  console.log(d);
 }
 
 data.sort(function(a,b){
-  b.color - a.color;
+  return b.color - a.color;
 });
 
 for (var i = 0; i < data.length; i++) {
@@ -33,14 +33,15 @@ for (var i = 0; i < data.length; i++) {
 
 
 data.sort(function(a,b){
-  b.size - a.size;
+  return b.size - a.size;
 });
 
 for (var i = 0; i < data.length; i++) {
+  var d = data[i];
   data[i].size = Math.floor(i/(data.length/5));
-}
 
-console.log(data);
+  console.log(d.risk,d.reward,d.color,d.size);
+}
 
 function getNumber(str){
   // Billion
