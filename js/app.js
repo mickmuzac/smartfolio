@@ -105,17 +105,17 @@ function businessData(stocks)
       var curShape;
       if(stocks[i].up)
       {
-        curShape = 'triangle-up';
+        curShape = 'circle';
       }
       else
       {
-        curShape = 'triangle-down';
+        curShape = 'circle';
       }
       var colorVal = stocks[i].color;
-      if(!stocks[i].up)
-      {
-        colorVal += 5;
-      }
+      // if(!stocks[i].up)
+      // {
+      //   colorVal += 5;
+      // }
       if(stocks[i].business == "EA" ||
       stocks[i].business == "LBTYK" ||
       stocks[i].business == "CHTR" ||
@@ -174,11 +174,11 @@ function industryData(stocks)
     // var curShape;
     if(stocks[j].up)
     {
-      var curShape = 'triangle-up';
+      var curShape = 'circle';
     }
     else
     {
-      var curShape = 'triangle-down';
+      var curShape = 'circle';
     }
     data[map[stocks[j].industry]].values.push({
       x: stocks[j].risk
